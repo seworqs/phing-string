@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phing-string-tasks" default="noop" basedir=".">
+
+    <!-- Core casing tasks -->
+    <taskdef name="stringcase" classname="Seworqs\Phing\String\Task\Casing\StringcaseTask" classpath="../../vendor/autoload.php" />
+    <taskdef name="uppercase" classname="Seworqs\Phing\String\Task\Casing\UppercaseTask" classpath="../../vendor/autoload.php" />
+    <taskdef name="lowercase" classname="Seworqs\Phing\String\Task\Casing\LowercaseTask" classpath="../../vendor/autoload.php" />
+    <taskdef name="camelcase" classname="Seworqs\Phing\String\Task\Casing\CamelcaseTask" classpath="../../vendor/autoload.php" />
+    <taskdef name="pascalcase" classname="Seworqs\Phing\String\Task\Casing\PascalcaseTask" classpath="../../vendor/autoload.php" />
+    <taskdef name="snakecase" classname="Seworqs\Phing\String\Task\Casing\SnakecaseTask" classpath="../../vendor/autoload.php" />
+    <taskdef name="screamingsnakecase" classname="Seworqs\Phing\String\Task\Casing\ScreamingsnakecaseTask" classpath="../../vendor/autoload.php" />
+    <taskdef name="kebabcase" classname="Seworqs\Phing\String\Task\Casing\KebabcaseTask" classpath="../../vendor/autoload.php" />
+    <taskdef name="screamingkebabcase" classname="Seworqs\Phing\String\Task\Casing\ScreamingkebabcaseTask" classpath="../../vendor/autoload.php" />
+    <taskdef name="titlecase" classname="Seworqs\Phing\String\Task\Casing\TitlecaseTask" classpath="../../vendor/autoload.php" />
+
+    <!-- Path and namespace tasks -->
+    <taskdef name="pathtask" classname="Seworqs\Phing\String\Task\Path\PathTask" classpath="../../vendor/autoload.php" />
+    <taskdef name="pathtransform" classname="Seworqs\Phing\String\Task\Path\PathTransformTask" classpath="../../vendor/autoload.php" />
+    <taskdef name="namespace" classname="Seworqs\Phing\String\Task\Namespace\NamespaceTask" classpath="../../vendor/autoload.php" />
+    <taskdef name="namespacetransform" classname="Seworqs\Phing\String\Task\Namespace\NamespaceTransformTask" classpath="../../vendor/autoload.php" />
+
+    <!-- Random string generator -->
+    <taskdef name="randomstring" classname="Seworqs\Phing\String\Task\Random\RandomStringTask" classpath="../../vendor/autoload.php" />
+
+    <target name="noop">
+        <echo message="Using seworqs/phing-string default taskdefs." />
+    </target>
+</project>

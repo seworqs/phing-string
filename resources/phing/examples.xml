@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phing-string-examples" default="all">
+
+    <!--
+        Task registration
+        Create your own taskdefs, or just import phing-string-taskdefs.xml to get access to all the taskdefs.
+    -->
+    <taskdef name="camelcase" classname="Seworqs\Phing\String\Task\Casing\CamelcaseTask"/>
+    <taskdef name="snakecase" classname="Seworqs\Phing\String\Task\Casing\SnakecaseTask"/>
+    <taskdef name="pascalcase" classname="Seworqs\Phing\String\Task\Casing\PascalcaseTask"/>
+    <taskdef name="kebabcase" classname="Seworqs\Phing\String\Task\Casing\KebabcaseTask"/>
+    <taskdef name="screamingsnakecase" classname="Seworqs\Phing\String\Task\Casing\ScreamingsnakecaseTask"/>
+    <taskdef name="screamingkebabcase" classname="Seworqs\Phing\String\Task\Casing\ScreamingkebabcaseTask"/>
+    <taskdef name="titlecase" classname="Seworqs\Phing\String\Task\Casing\TitlecaseTask"/>
+    <taskdef name="uppercase" classname="Seworqs\Phing\String\Task\Casing\UppercaseTask"/>
+    <taskdef name="lowercase" classname="Seworqs\Phing\String\Task\Casing\LowercaseTask"/>
+    <taskdef name="stringcase" classname="Seworqs\Phing\String\Task\Casing\StringcaseTask"/>
+    <taskdef name="namespace" classname="Seworqs\Phing\String\Task\Namespace\NamespaceTask"/>
+    <taskdef name="namespacetransform" classname="Seworqs\Phing\String\Task\Namespace\NamespaceTransformTask"/>
+    <taskdef name="path" classname="Seworqs\Phing\String\Task\Path\PathTask"/>
+    <taskdef name="camelpath" classname="Seworqs\Phing\String\Task\Path\CamelPathTask"/>
+    <taskdef name="kebabpath" classname="Seworqs\Phing\String\Task\Path\KebabPathTask"/>
+    <taskdef name="snakepath" classname="Seworqs\Phing\String\Task\Path\SnakePathTask"/>
+    <taskdef name="pascalpath" classname="Seworqs\Phing\String\Task\Path\PascalPathTask"/>
+    <taskdef name="pathtransform" classname="Seworqs\Phing\String\Task\Path\PathTransformTask"/>
+    <taskdef name="random" classname="Seworqs\Phing\String\Task\Random\RandomStringTask"/>
+
+    <target name="all" depends="casing,path,namespace,random"/>
+
+    <target name="casing" description="Casing examples">
+        <!--
+            This section shows various casing transformations.
+            Starting from simple static inputs, then more advanced configuration options,
+            including chained operations and delimiter manipulation.
+        -->
+        <property name="example.casing.input" value="This is_some-test/string"/>
+
+        <!-- Basic casing examples -->
+        <uppercase value="${example.casing.input}" property="example.casing.uppercase"/>
+        <lowercase value="${example.casing.input}" property="example.casing.lowercase"/>
+        <pascalcase value="${example.casing.input}" property="example.casing.pascalcase"/>
+
+        <!-- Using custom delimiters -->
+        <!-- Only space and dash are used to split the segments -->
+        <pascalcase value="This-is another_example,string" property="example.casing.customdelim" delimiters="-, ,_"/>
+
+        <!-- Change the delimiter separator so we can use comma as a delimiter -->
+        <pascalcase value="This#is#comma,separated" property="example.casing.customsep" delimiters=",#-" delimiterseparator="#"/>
+
+        <!-- Chaining multiple casing operations -->
+        <stringcase from="example.casing.input" suffix="chained">
+            <pascalcase/>
+            <lowercase/>
+        </stringcase>
+
+        <!-- Chaining with individual property results (keepSubTaskProperties) -->
+        <stringcase from="example.casing.input" suffix="chained2" keepsubtaskproperties="true">
+            <pascalcase delimiters=" "/>
+            <lowercase/>
+            <uppercase suffix="upper"/>
+        </stringcase>
+
+        <echoproperties regex="#^example\.casing\..*#"/>
+    </target>
+
+    <target name="path" description="Path examples">
+        <!--
+            Demonstrates transformations of path strings to various casing styles.
+            Shows use of custom separators and delimiters.
+        -->
+        <property name="example.path.input" value="seworqs/some_module"/>
+
+        <path value="${example.path.input}" property="example.path.default"/>
+        <camelpath value="${example.path.input}" property="example.path.camel"/>
+        <kebabpath value="${example.path.input}" property="example.path.kebab"/>
+        <snakepath value="${example.path.input}" property="example.path.snake"/>
+        <pascalpath value="${example.path.input}" property="example.path.pascal"/>
+
+        <!-- Using pathtransform to append and prepend segments -->
+        <pathtransform from="example.path.input" property="example.path.transform">
+            <prepend name="Prepend"/>
+            <append name="Append"/>
+        </pathtransform>
+
+        <echoproperties regex="#^example\.path\..*#"/>
+    </target>
+
+    <target name="namespace" description="Namespace examples">
+        <!--
+            Shows how to convert strings to namespace format.
+            Includes example of transforming with prepended and appended segments.
+        -->
+        <property name="example.namespace.input" value="seworqs/some_module"/>
+
+        <namespace value="${example.namespace.input}" property="example.namespace.default"/>
+
+        <namespacetransform from="example.namespace.input" property="example.namespace.transformed">
+            <prepend name="Company"/>
+            <append name="Utils"/>
+        </namespacetransform>
+
+        <echoproperties regex="#^example\.namespace\..*#"/>
+    </target>
+
+    <target name="random" description="Random string generation">
+        <!--
+            Generates random strings with different configurations.
+        -->
+        <random property="example.random.basic" length="12"/>
+        <random property="example.random.custom" length="8" haystack="ABC123"/>
+
+        <echoproperties regex="#^example\.random\..*#"/>
+    </target>
+
+</project>
