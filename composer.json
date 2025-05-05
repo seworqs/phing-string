@@ -1,6 +1,6 @@
 {
   "name": "seworqs/phing-string",
-  "description": "?",
+  "description": "A collection of Phing tasks for string casing, namespaces, path conversion, and random string generation. Useful for manipulating and transforming strings within your Phing build process.",
   "type": "library",
   "license": "Apache-2.0",
   "keywords": ["seworqs", "phing", "string"],
