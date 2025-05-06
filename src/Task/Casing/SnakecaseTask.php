@@ -8,10 +8,10 @@ use Seworqs\Phing\String\Task\Interface\DelimiterAwareInterface;
 
 class SnakecaseTask extends AbstractCasingTask implements DelimiterAwareInterface
 {
-    protected function transform(string $value, array $options = []): string
+    protected function transform(string $value): string
     {
         return CaseHelper::from($value)
-            ->setDelimiters($options['delimiters'] ?? [])
+            ->setDelimiters($this->getDelimiters())
             ->convertTo(EnumCaseType::SNAKE);
     }
 

@@ -11,7 +11,7 @@ class TitlecaseTask extends AbstractCasingTask implements DelimiterAwareInterfac
     protected function transform(string $value, array $options = []): string
     {
         return CaseHelper::from($value)
-            ->setDelimiters($options['delimiters'] ?? [])
+            ->setDelimiters($this->getDelimiters())
             ->convertTo(EnumCaseType::TITLE);
     }
 

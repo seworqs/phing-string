@@ -11,7 +11,7 @@ class PascalcaseTask extends AbstractCasingTask implements DelimiterAwareInterfa
     protected function transform(string $value): string
     {
         return CaseHelper::from($value)
-            ->setDelimiters($this->delimiters)
+            ->setDelimiters($this->getDelimiters())
             ->convertTo(EnumCaseType::PASCAL);
     }
 

@@ -11,7 +11,7 @@ class ScreamingkebabcaseTask extends AbstractCasingTask implements DelimiterAwar
     protected function transform(string $value, array $options = []): string
     {
         return CaseHelper::from($value)
-            ->setDelimiters($options['delimiters'] ?? [])
+            ->setDelimiters($this->getDelimiters())
             ->convertTo(EnumCaseType::SCREAMING_KEBAB);
     }
 

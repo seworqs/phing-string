@@ -32,7 +32,7 @@ abstract class AbstractCasingTask extends Task
         $this->traitSetDelimiters($delimiters);
     }
 
-    abstract protected function transform(string $input): string;
+    abstract protected function transform(string $value): string;
     abstract public function getDefaultSuffix(): string;
 
     public function getSuffix(): string {
